@@ -1,4 +1,24 @@
 Vagrant.configure("2") do |config|
   config.vm.box = "ubuntu/xenial64"
+  #config.vm.box = "debian/stretch64"
+  
+  config.vm.hostname = "minikube"
+  config.vm.network "public_network", bridge: "Broadcom NetLink (TM) Gigabit Ethernet #2"
+  config.vm.box_check_update = false
+
+  if Vagrant.has_plugin?("vagrant-vbguest") then
+    config.vbguest.auto_update = false
+  end
+
+  # Customize the amount of memory and cpu on the VM:
+  config.vm.provider "virtualbox" do |vb|
+    vb.memory = "3072"
+    vb.cpus = 2
+  end
+
+  # Fix for SCSI controller problem
+  config.vm.provision "file", source: "99-vagrant.rules", destination: "/etc/udev/rules.d/99-vagrant.rules"
+      
+  # minikube installation    
   config.vm.provision "shell", path: "install.sh"
 end

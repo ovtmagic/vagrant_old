@@ -1,0 +1,2 @@
+ACTION=="add", SUBSYSTEM=="scsi" , ATTR{type}=="0|7|14", \
+RUN+="/bin/sh -c 'echo 180 > /sys$$DEVPATH/timeout'"

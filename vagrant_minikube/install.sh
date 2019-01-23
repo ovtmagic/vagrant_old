@@ -37,3 +37,5 @@ curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/miniku
 chmod +x minikube
 sudo cp minikube /usr/local/bin && rm minikube
 
+# Clone repo from kubernets course
+runuser -l vagrant -c "mkdir -p /home/vagrant/curso;cd /home/vagrant/curso;git clone https://github.com/LevelUpEducation/kubernetes-demo.git"
