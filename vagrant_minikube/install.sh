@@ -1,7 +1,6 @@
 # apps
-touch /tmp/kkdvk
 echo "set -g mouse" > /home/vagrant/.tmux.conf
-apt-get install -y aptitude
+apt-get install -y aptitude git
 
 # Docker
 sudo apt-get update

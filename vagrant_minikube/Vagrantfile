@@ -22,6 +22,7 @@ Vagrant.configure("2") do |config|
   
   # Fix for SCSI controller problem
   config.vm.provision "file", source: "./99-vagrant.rules", destination: "/tmp/99-vagrant.rules"
+  config.vm.provision "file", source: "./gitconfig", destination: "/home/vagrant/.gitconfig"
   config.vm.provision "shell", inline: "echo 180 > /sys/block/sda/device/timeout; cp /tmp/99-vagrant.rules /etc/udev/rules.d/99-vagrant.rules"
   
 end
