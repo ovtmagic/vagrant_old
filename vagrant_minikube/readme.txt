@@ -6,3 +6,7 @@ vagrant plugin list
 minikube dashboard --url
 kubectl proxy --address=192.168.0.128 --disable-filter
 http://192.168.0.128:8001/api/v1/namespaces/kube-system/services/http:kubernetes-dashboard:/proxy/
+
+# To resize disk
+vagrant plugin install vagrant-disksize
+in Vagrantfile: config.disksize.size = '60GB'

@@ -1,6 +1,7 @@
 Vagrant.configure("2") do |config|
   config.vm.box = "ubuntu/xenial64"
   #config.vm.box = "debian/stretch64"
+  #config.disksize.size = "15GB"
   
   config.vm.hostname = "minikube"
   config.vm.network "public_network", bridge: "Broadcom NetLink (TM) Gigabit Ethernet #2"
@@ -13,7 +14,8 @@ Vagrant.configure("2") do |config|
 
   # Customize the amount of memory and cpu on the VM:
   config.vm.provider "virtualbox" do |vb|
-    vb.memory = "3072"
+    vb.memory = "2048"
+    #vb.memory = "3072"
     vb.cpus = 2
   end
     
