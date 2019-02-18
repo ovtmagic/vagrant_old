@@ -15,5 +15,7 @@ Testing vagrant
 * Open VirtualBox, the VM should be there! (optional)
 * Default user/password:
    * vagrant/vagrant
+* Halt VM:
+   * vagrant halt
 ## Start minikube
 * minikube start --vm-driver=none
