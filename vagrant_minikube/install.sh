@@ -1,6 +1,6 @@
 # apps
 echo "set -g mouse" > /home/vagrant/.tmux.conf
-apt-get install -y aptitude git
+apt-get install -y aptitude git socat
 
 # Docker
 sudo apt-get update
@@ -23,7 +23,6 @@ sudo usermod -aG docker vagrant
 
 
 # Kubernetes
-
 sudo apt-get update && sudo apt-get install -y apt-transport-https
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
 echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
@@ -36,6 +35,11 @@ curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/miniku
 chmod +x minikube
 sudo cp minikube /usr/local/bin && rm minikube
 
+
+# Helm
+curl -s |https://storage.googleapis.com/kubernetes-helm/helm-v2.12.3-linux-amd64.tar.gz|tar zx
+cp linux-amd64/helm /usr/local/bin
+cp linux-amd64/tiller /usr/local/bin
 
 # Docker compose
 curl -L "https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
