@@ -37,7 +37,7 @@ sudo cp minikube /usr/local/bin && rm minikube
 
 
 # Helm
-curl -s |https://storage.googleapis.com/kubernetes-helm/helm-v2.12.3-linux-amd64.tar.gz|tar zx
+curl -s https://storage.googleapis.com/kubernetes-helm/helm-v2.12.3-linux-amd64.tar.gz|tar zx
 cp linux-amd64/helm /usr/local/bin
 cp linux-amd64/tiller /usr/local/bin
 
