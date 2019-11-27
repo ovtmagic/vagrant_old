@@ -4,7 +4,8 @@ Vagrant.configure("2") do |config|
   #config.disksize.size = "15GB"
   
   config.vm.hostname = "minikube"
-  config.vm.network "public_network", bridge: "Broadcom NetLink (TM) Gigabit Ethernet #2"
+  # Uncoment following line to add a bridge interface
+  #config.vm.network "public_network", bridge: "Realtek PCIe GBE Family Controller"
   config.vm.box_check_update = false
 
   if Vagrant.has_plugin?("vagrant-vbguest") then
@@ -18,6 +19,11 @@ Vagrant.configure("2") do |config|
     #vb.memory = "3072"
     vb.cpus = 2
   end
+
+  # some user configs
+  config.vm.provision "file", source: "./gitconfig", destination: "/home/vagrant/.gitconfig"
+  config.vm.provision "file", source: "./vimrc", destination: "/home/vagrant/.vimrc"
+  config.vm.provision "file", source: "./tmux", destination: "/home/vagrant/.tmux.conf"
     
   # minikube installation    
   config.vm.provision "shell", path: "install.sh"
@@ -25,9 +31,5 @@ Vagrant.configure("2") do |config|
   # Fix for SCSI controller problem
   #config.vm.provision "file", source: "./99-vagrant.rules", destination: "/tmp/99-vagrant.rules"
   #config.vm.provision "shell", inline: "echo 180 > /sys/block/sda/device/timeout; cp /tmp/99-vagrant.rules /etc/udev/rules.d/99-vagrant.rules"
-
-  # some user configs
-  config.vm.provision "file", source: "./gitconfig", destination: "/home/vagrant/.gitconfig"
-  config.vm.provision "file", source: "./vimrc", destination: "/home/vagrant/.vimrc"
 
 end

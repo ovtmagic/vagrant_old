@@ -1,0 +1,21 @@
+# mouse
+setw -g mouse on
+setw -g mouse-resize-pane on
+setw -g mouse-select-pane on
+setw -g mouse-select-window on
+
+# default shell
+set-option -g default-shell /bin/bash
+
+# resize panes like vim
+bind < resize-pane -L 10
+bind > resize-pane -R 10
+bind - resize-pane -D 10
+bind + resize-pane -U 10
+
+# history
+# set -g history-limit 5000
+
+# Vi mode
+set-window-option -g mode-keys vi
+
