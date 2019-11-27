@@ -45,5 +45,9 @@ cp linux-amd64/tiller /usr/local/bin
 curl -L "https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose
 
+# k9s
+curl -SL  https://github.com/derailed/k9s/releases/download/0.9.3/k9s_0.9.3_Linux_x86_64.tar.gz |tar zxv -C /tmp
+sudo cp /tmp/k9s /usr/local/bin
+
 # Clone repo from kubernets course
 runuser -l vagrant -c "mkdir -p /home/vagrant/curso;cd /home/vagrant/curso;git clone https://github.com/LevelUpEducation/kubernetes-demo.git"
