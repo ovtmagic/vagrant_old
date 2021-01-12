@@ -8,6 +8,8 @@ sudo apt-get -y install \
     ca-certificates \
     curl \
     gnupg2 \
+    make \
+    python \
     software-properties-common
 apt-get install -y aptitude git socat
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
@@ -33,14 +35,15 @@ sudo apt-get install -y kubectl
 
 # Minikube
 #curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 > /dev/null 2>&1
-curl -Lo minikube https://storage.googleapis.com/minikube/releases/v1.1.0/minikube-linux-amd64 > /dev/null 2>&1
-#curl -Lo minikube https://storage.googleapis.com/minikube/releases/v1.4.0/minikube-linux-amd64 > /dev/null 2>&1
+#curl -Lo minikube https://storage.googleapis.com/minikube/releases/v1.1.0/minikube-linux-amd64 > /dev/null 2>&1
+curl -Lo minikube https://storage.googleapis.com/minikube/releases/v1.4.0/minikube-linux-amd64 > /dev/null 2>&1
 chmod +x minikube
 sudo cp minikube /usr/local/bin && rm minikube
 
 
 # Helm
-curl -s https://storage.googleapis.com/kubernetes-helm/helm-v2.12.3-linux-amd64.tar.gz|tar zx
+#curl -s https://storage.googleapis.com/kubernetes-helm/helm-v2.12.3-linux-amd64.tar.gz|tar zx
+curl -s https://storage.googleapis.com/kubernetes-helm/helm-v2.16.1-linux-amd64.tar.gz|tar zx
 cp linux-amd64/helm /usr/local/bin
 cp linux-amd64/tiller /usr/local/bin
 
@@ -49,8 +52,20 @@ curl -L "https://github.com/docker/compose/releases/download/1.23.2/docker-compo
 chmod +x /usr/local/bin/docker-compose
 
 # k9s
-curl -SL  https://github.com/derailed/k9s/releases/download/0.9.3/k9s_0.9.3_Linux_x86_64.tar.gz |tar zxv -C /tmp
+curl -SL  https://github.com/derailed/k9s/releases/download/v0.17.1/k9s_Linux_x86_64.tar.gz |tar zxv -C /tmp
 sudo cp /tmp/k9s /usr/local/bin
 
 # Clone repo from kubernets course
-runuser -l vagrant -c "mkdir -p /home/vagrant/curso;cd /home/vagrant/curso;git clone https://github.com/LevelUpEducation/kubernetes-demo.git"
+#runuser -l vagrant -c "mkdir -p /home/vagrant/curso;cd /home/vagrant/curso;git clone https://github.com/LevelUpEducation/kubernetes-demo.git"
+
+# Install and start minikube --------------------------------------------------------------
+INSTALL_MINIKUBE="true"
+if [[ "$INSTALL_MINIKUBE" == "true" ]]; then
+  sudo -i minikube start --vm-driver=none --kubernetes-version=v1.17.3
+  sudo -i /vagrant/scripts/copy_k8s_conf.sh
+  helm init
+  sudo minikube addons enable metrics-server
+fi
+
+# User configuration
+runuser -l vagrant -c "echo 'source <(kubectl completion bash)' >> /home/vagrant/.bashrc"
